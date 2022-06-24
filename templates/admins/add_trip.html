@@ -1,0 +1,115 @@
+{% extends 'admins/base.html' %}
+
+{% block content %}
+
+    <div style="direction: ltr;" class="wrapper">
+        <div class="content-wrapper p-5">
+            <div class="row mb-2">
+                <div class="col-7">
+                    <h1>Trips</h1>
+                </div>
+            </div>
+            <!-- content -->
+            <section class="content">
+
+                <div class="card card-solid">
+                    <div class="card-body pb-0">
+                        <div class="row d-flex align-items-stretch">
+                            {% for trip in trips %}
+                                <div id="" class="col-md-4">
+                                    <div id="" class="card card-widget widget-user ">
+
+                                        <div class="card-footer">
+                                            <div class="row">
+                                                <div class="col-sm-6 border-right">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header">{{ trip.source }}</h5>
+                                                        <span class="description-text">source</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 border-right">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header">{{ trip.destination }}</h5>
+                                                        <span class="description-text">destination</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 border-right">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header">{{ trip.From }}</h5>
+                                                        <span class="description-text">from</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 border-right">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header">{{ trip.To }}</h5>
+                                                        <span class="description-text">to</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 border-right">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header">{{ trip.date }}</h5>
+                                                        <span class="description-text">date</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 border-right">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header">{{ trip.number_of_seats }}</h5>
+                                                        <span class="description-text">seats</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 border-right">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header">{{ trip.ticket_price }}</h5>
+                                                        <span class="description-text">price</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="text-right">
+                                                <a href="{% url 'update_trip' trip.trip_id %}"
+                                                   class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-book"></i> Update
+                                                </a>
+                                                <a href="{% url 'delete_trip' trip.trip_id %}" class="btn btn-sm bg-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <a href="{% url 'index'%}" class="btn btn-primary ">back</a>
+
+             <!-- Add trip section -->
+            <div class="row m-1 mb-3">
+                <a href="#trip-form" class="btn btn-primary" data-toggle="collapse">+ Add a trip</a>
+            </div>
+
+            <div id="trip-form" class="card card-primary collapse">
+                <div class="card-header ">
+                    <h3 class="card-title">Adding trip</h3>
+                </div>
+                <!-- Add trip form -->
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        {{ form }}
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

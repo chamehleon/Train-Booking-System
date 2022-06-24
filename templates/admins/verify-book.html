@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  
+<style>
+span ,.seats{
+  width:300px;
+  padding: 12px 12px;
+  margin: 0px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  background: whitesmoke;
+  border-radius: 4px;
+  box-sizing: border-box;  
+ 
+}
+.left{
+  width:8em;
+  float:left;
+  margin-top:6px
+
+}
+
+button {
+  width:70%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+.container {
+  border-radius: 5px;
+  background-color: #adadce31;
+  padding:20px;
+  margin-top:80px;
+  margin-left: auto;
+  margin-right:auto;
+  width:45%;
+
+}
+</style>
+<body>
+  <h1>Book trip {{trip.trip_id}}</h1>
+  <div class="container">
+    {%for message in messages %}
+      <h2 style="color: rgb(255, 102, 0)">{{message}}</h2>
+      <hr>
+    {% endfor %}
+    <form class="form-control" style="margin-left: 140px;" action="{% url 'verifyBook' trip.trip_id%}" method="POST">
+        {%csrf_token%}
+
+        <label class ="left"for="">From: </label>
+        <span>{{trip.From}}</span>
+        <br><br>
+        <label class="left" for="">To: </label>
+         <span>{{trip.To}}</span>
+        <br><br>
+
+        <label class="left" for="">Departure Date: </label>
+        <span>{{trip.date}}</span>
+        <br><br>
+        <label class="left" for="">price: </label>
+        <span>{{trip.ticket_price}}</span>
+        <br><br>
+
+        <label   class="left" for="">Slots to Book: </label>
+        <input type ="number" name="Slots" placeholder="Enter number of seats" class ="seats" required="required">
+
+        <br><br>
+          <button type="submit" name="button" class="btn btn-primary">Book</button>
+          <a href="{% url 'home'%}" class="btn btn-primary" >back</a>
+        </form>
+  </div>
+</body>
+</html>
